@@ -58,18 +58,20 @@ public class Librea extends JFrame {
 		btnKatalogoaIkusi.setBounds(5, 58, 193, 73);
 		btnKatalogoaIkusi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Lib.katalogoaIkusi();
+				KatalogoaIn frame = new KatalogoaIn();
+				frame.setVisible(true);
 			}
 		});
 		contentPane.add(btnKatalogoaIkusi);
 		
 		JButton btnEstreinaldiakIkusi = new JButton("Estreinaldiak ikusi");
+		btnEstreinaldiakIkusi.setBounds(5, 138, 194, 73);
 		btnEstreinaldiakIkusi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Lib.estreinaldiakIkusi();
+				EstreinaldiakIn frame = new EstreinaldiakIn();
+				frame.setVisible(true);
 			}
 		});
-		btnEstreinaldiakIkusi.setBounds(5, 138, 194, 73);
 		contentPane.add(btnEstreinaldiakIkusi);
 		
 		JButton btnSaioaAmaitu = new JButton("Saioa Amaitu");

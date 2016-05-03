@@ -1,15 +1,16 @@
 package bideoklub;
 
+import java.util.ArrayList;
+
 public class Libre {
 	
 	public Libre(){}
 	
-	public void katalogoaIkusi(){
-		//TODO
+	public ArrayList<String> katalogoaIkusi(){
+		return Bideokluba.getDB().katalogoaIkusi();
 	}
 
-	public void estreinaldiakIkusi() {
-		// TODO Auto-generated method stub
-		
+	public ArrayList<String> estreinaldiakIkusi() {
+		return Bideokluba.getDB().estreinaldiakIkusi();
 	}
 }

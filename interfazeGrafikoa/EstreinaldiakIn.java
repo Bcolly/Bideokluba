@@ -24,7 +24,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 
-public class KatalogoaIn extends JFrame {
+public class EstreinaldiakIn extends JFrame {
 
 	private JPanel contentPane;
 	private JLabel lblNewLabel;
@@ -50,7 +50,7 @@ public class KatalogoaIn extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public KatalogoaIn() {
+	public EstreinaldiakIn() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 300, 300);
 		contentPane = new JPanel();
@@ -62,7 +62,7 @@ public class KatalogoaIn extends JFrame {
 		
 		textArea = new JTextArea();
 		//scrollPane.setRowHeaderView(textArea);
-		ArrayList<String> pelis = l.katalogoaIkusi();
+		ArrayList<String> pelis = l.estreinaldiakIkusi();
 		Iterator<String> itr = pelis.iterator();
 		int i = 0;
 		while (itr.hasNext()) {
@@ -88,9 +88,5 @@ public class KatalogoaIn extends JFrame {
 				dispose();
 			}
 		});
-		
 	}
-	
-
 }
-

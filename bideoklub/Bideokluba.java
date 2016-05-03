@@ -280,10 +280,10 @@ public class Bideokluba {
 		    	String kodea = res.getString("kodea");
 		    	String prezioa = res.getString("prezioa");
 		    	String egoera = res.getString("egoera");
-		    	/*System.out.println("Kodea: "+kodea+", "
+		    	System.out.println("Kodea: "+kodea+", "
 		    			+ "Izena: "+izena+", "
 		    			+ "Prezioa: "+prezioa+" ,"
-		    			+ "Egoera: "+egoera);*/
+		    			+ "Egoera: "+egoera);
 		    	zerrenda.add(izena); zerrenda.add(kodea); 
 		    	zerrenda.add(prezioa); zerrenda.add(egoera);
 		    	}
@@ -304,16 +304,16 @@ public class Bideokluba {
         ArrayList<String> zerrenda = new ArrayList<String>();
     	try {
     		sta = con.createStatement();
-    		res = sta.executeQuery("SELECT titulua,kodea,prezioa,egoera FROM PELIKULA WHERE data>='"+urtea+"-"+hila+"-"+eguna+" %' ORDER BY data");
+    		res = sta.executeQuery("SELECT titulua,kodea,prezioa,egoera FROM PELIKULA WHERE data>='"+urtea+"-"+hila+"-"+eguna+"%' ORDER BY data");
     		while (res.next()) {
 				String izena = res.getString("titulua");
 		    	String kodea = res.getString("kodea");
 		    	String prezioa = res.getString("prezioa");
 		    	String egoera = res.getString("egoera");
-		    	/*System.out.println("Kodea: "+kodea+", "
+		    	System.out.println("Kodea: "+kodea+", "
 		    			+ "Izena: "+izena+", "
 		    			+ "Prezioa: "+prezioa+" ,"
-		    			+ "Egoera: "+egoera);*/
+		    			+ "Egoera: "+egoera);
 		    	zerrenda.add(izena); zerrenda.add(kodea); 
 		    	zerrenda.add(prezioa); zerrenda.add(egoera);
 		    	}
