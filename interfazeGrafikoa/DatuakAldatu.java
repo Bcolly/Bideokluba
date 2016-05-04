@@ -1,6 +1,7 @@
 package interfazeGrafikoa;
 
 import java.awt.EventQueue;
+import java.awt.Menu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -9,10 +10,13 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 
 import bideoklub.Administratzailea;
 import bideoklub.Bazkidea;
+import bideoklub.Bideokluba;
+import bideoklub.Menua;
 
 
 public class DatuakAldatu extends JFrame {
@@ -51,11 +55,13 @@ public class DatuakAldatu extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		String[] bazkidea = Bideokluba.getDB().bazkideOsoa(Menua.getMenua().kodeaLortu());
 		
 		textField = new JTextField();
 		textField.setBounds(10, 51, 127, 20);
 		contentPane.add(textField);
 		textField.setColumns(10);
+		textField.setText(bazkidea[0]);
 		
 		JLabel lblNewLabel = new JLabel("Jarri bazkidearen datuak");
 		lblNewLabel.setBounds(10, 11, 160, 14);
@@ -64,6 +70,7 @@ public class DatuakAldatu extends JFrame {
 		JLabel lblIzena = new JLabel("Izena");
 		lblIzena.setBounds(10, 36, 46, 14);
 		contentPane.add(lblIzena);
+		
 		
 		JLabel lblAbizena = new JLabel("Abizena");
 		lblAbizena.setBounds(10, 81, 46, 14);
@@ -81,6 +88,7 @@ public class DatuakAldatu extends JFrame {
 		textField_1.setBounds(10, 95, 127, 20);
 		contentPane.add(textField_1);
 		textField_1.setColumns(10);
+		textField_1.setText(bazkidea[1]);
 		
 		textField_2 = new JTextField();
 		textField_2.setBounds(10, 146, 127, 20);
@@ -91,12 +99,16 @@ public class DatuakAldatu extends JFrame {
 		textField_3.setBounds(10, 191, 378, 20);
 		contentPane.add(textField_3);
 		textField_3.setColumns(10);
+		textField_3.setText(bazkidea[2]);
 		
 		JButton btnSortu = new JButton("Aldatu");
 		btnSortu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				bazkide.datuakAldatu(textField.getText(),textField_1.getText(),textField_2.getText(),textField_3.getText());
+				String eran =  bazkide.datuakAldatu(Menua.getMenua().kodeaLortu(),textField.getText(),textField_1.getText(),textField_2.getText(),textField_3.getText());
+				JOptionPane a = new JOptionPane();
+				a.showMessageDialog(null,eran);
 				dispose();
+				
 			}
 		});
 		btnSortu.setBounds(20, 222, 89, 23);

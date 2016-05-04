@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -13,10 +14,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import bideoklub.Bazkidea;
+import bideoklub.Bideokluba;
+import bideoklub.Menua;
 
 public class BazkideaIn extends JFrame {
 
+	private static BazkideaIn nBazkide;
 	private JPanel contentPane;
+	private JLabel lblNewLabel2;
 
 	/**
 	 * Launch the application.
@@ -37,7 +42,7 @@ public class BazkideaIn extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public BazkideaIn() {
+	private BazkideaIn() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -46,18 +51,21 @@ public class BazkideaIn extends JFrame {
 		contentPane.setLayout(null);
 		Bazkidea Baz = new Bazkidea();
 		
-		JLabel label = new JLabel("");
-		label.setBounds(0, 0, 0, 0);
-		contentPane.add(label);
-		
-		JLabel lblNewLabel = new JLabel("Kaixo " + "TODO");
+		JLabel lblNewLabel = new JLabel("Kaixo " + Bideokluba.getDB().bazkideOsoa(Menua.getMenua().kodeaLortu())[0]);
 		lblNewLabel.setBounds(5, 5, 424, 14);
 		contentPane.add(lblNewLabel);
+		
+		lblNewLabel2 = new JLabel("Zure dirua: "+ Bideokluba.getDB().dirua(Menua.getMenua().kodeaLortu())+"€ da");
+		lblNewLabel2.setHorizontalAlignment(SwingConstants.RIGHT);
+		contentPane.add(lblNewLabel2, BorderLayout.NORTH);
+		lblNewLabel2.setBounds(5, 5, 424, 14);
+		contentPane.add(lblNewLabel2);
 		
 		JButton btnKatalogoaIkusi = new JButton("Katalogoa Ikusi");
 		btnKatalogoaIkusi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Baz.katalogoaIkusi();
+				KatalogoaIn frame = new KatalogoaIn();
+				frame.setVisible(true);
 			}
 		});
 		btnKatalogoaIkusi.setBounds(38, 116, 175, 41);
@@ -66,7 +74,8 @@ public class BazkideaIn extends JFrame {
 		JButton button_1 = new JButton("Estreinaldiak ikusi");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Baz.estreinaldiakIkusi();
+				EstreinaldiakIn frame = new EstreinaldiakIn();
+				frame.setVisible(true);
 			}
 		});
 		button_1.setBounds(215, 116, 175, 41);
@@ -96,6 +105,9 @@ public class BazkideaIn extends JFrame {
 	JButton btnSaioaAmaitu = new JButton("Saioa Amaitu");
 	btnSaioaAmaitu.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent arg0) {
+			nBazkide=null;
+			Menua.getMenua().hasieratu();;
+			Menua.getMenua().setVisible(true);
 			dispose();
 		}
 	});
@@ -107,6 +119,7 @@ public class BazkideaIn extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			KredituaGehitu frame = new KredituaGehitu();
 			frame.setVisible(true);
+			
 		}
 	});
 	btnNewButton.setBounds(38, 168, 175, 43);
@@ -122,4 +135,14 @@ public class BazkideaIn extends JFrame {
 	btnBazkideEgoera.setBounds(215, 168, 175, 41);
 	contentPane.add(btnBazkideEgoera);
 }
+	public static BazkideaIn getBazkide() {
+		if (nBazkide == null) {
+			nBazkide = new BazkideaIn();
+		}
+		return nBazkide;
+	}
+	
+	public void diruaEguneratu() {
+		lblNewLabel2.setText("Zure dirua: "+ Bideokluba.getDB().dirua(Menua.getMenua().kodeaLortu())+"€ da");
+	}
 }

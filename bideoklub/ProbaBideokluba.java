@@ -8,19 +8,19 @@ public class ProbaBideokluba {
 
 	 public static void main(String[] args) {
 		 Bideokluba bk = Bideokluba.getDB();
-		 bk.konektatu();
+		 //bk.konektatu();
 	    	 //probak
-	    /* bk.kredituaSartu("jonu12", "2.50");
-	     bk.bazkideaAldatu("1112B");
+	   //bk.kredituaSartu("jonu12", "2.50");
+	    // bk.bazkideaAldatu("1112B");
          //bk.bazkideaSortu("Pedro", "Diaz", "PEDI2016", "12345678", "Iturriaga 2 A");
-         bk.pelikulaBajaEman("ta1990");
-         bk.pelikulaSortu("ta1990", "tarzan", "10.50");   
-         bk.pelikulaBilatu("tarzan");
-         bk.pelikulaAlokatu("CAP122", "jonu12");
-         bk.pelikulaItzuli("CAP122", "jonu12");
-         bk.katalogoaIkusi();
-         bk.estreinaldiakIkusi();*/
+        // bk.pelikulaBajaEman("ta1990");
+        // bk.pelikulaSortu("ta1990", "tarzan", "10.50");   
+        // bk.pelikulaBilatu("tarzan");
+         //bk.pelikulaAlokatu("CAP122", "jonu12");
+        // bk.pelikulaItzuli("CAP122", "jonu12");
+         //bk.katalogoaIkusi();
+         //bk.estreinaldiakIkusi();
          
-         bk.konexioaItxi();
+        // bk.konexioaItxi();
 	     }
 	 }

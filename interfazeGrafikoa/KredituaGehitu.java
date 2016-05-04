@@ -76,6 +76,7 @@ public class KredituaGehitu extends JFrame {
 						a.showMessageDialog(null, "MEZUA"); //TODO
 					}
 					dispose();
+					BazkideaIn.getBazkide().diruaEguneratu();
 				}
 			});
 			btnItzuli.setBounds(10, 107, 89, 23);

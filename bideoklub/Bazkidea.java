@@ -16,21 +16,20 @@ public class Bazkidea extends Libre {
 		helbidea = pHelbidea;*/
 	}
 	
-	public void pelikulaAlokatu(String pPeliKodea, String pBazKodea){
-		Bideokluba.getDB().pelikulaAlokatu(pPeliKodea, pBazKodea);
+	public String pelikulaAlokatu(String pPeliKodea, String pBazKodea){
+		return Bideokluba.getDB().pelikulaAlokatu(pPeliKodea, pBazKodea);
 	}
 	
 	public String pelikulaItzuli(String pPeliKodea, String pBazKodea){
 		return Bideokluba.getDB().pelikulaItzuli(pPeliKodea, pBazKodea);
 	}
 	
-	public void kredituaGehitu(String pKodea, String pDirua) {
-		Bideokluba.getDB().kredituaSartu(pKodea, pDirua);
+	public String kredituaGehitu(String pKodea, String pDirua) {
+		return Bideokluba.getDB().kredituaSartu(pKodea, pDirua);
 	}
 
-	public void datuakAldatu(String text, String text2, String text3, String text4) {
-		// TODO Auto-generated method stub
-		
+	public String datuakAldatu(String pKodea, String pIzena, String pAbizenak, String pPass, String pHelbidea) {
+		return Bideokluba.getDB().datuakAldatu(pKodea, pIzena, pAbizenak, pPass, pHelbidea);
 	}
 	
 	

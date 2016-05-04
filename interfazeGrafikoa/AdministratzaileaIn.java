@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 
 import bideoklub.Administratzailea;
+import bideoklub.Menua;
 
 public class AdministratzaileaIn extends JFrame {
 
@@ -52,7 +53,8 @@ public class AdministratzaileaIn extends JFrame {
 		JButton button = new JButton("Katalogoa Ikusi");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				admin.katalogoaIkusi();
+				KatalogoaIn frame = new KatalogoaIn();
+				frame.setVisible(true);
 			}
 		});
 		button.setBounds(23, 207, 188, 44);
@@ -61,7 +63,8 @@ public class AdministratzaileaIn extends JFrame {
 		JButton button_1 = new JButton("Estreinaldiak ikusi");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				admin.estreinaldiakIkusi();
+				EstreinaldiakIn frame = new EstreinaldiakIn();
+				frame.setVisible(true);
 			}
 		});
 		button_1.setBounds(221, 207, 186, 44);
@@ -110,6 +113,8 @@ public class AdministratzaileaIn extends JFrame {
 		JButton btnSaioaAmaitu = new JButton("Saioa Amaitu");
 		btnSaioaAmaitu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				Menua.getMenua().hasieratu();;
+				Menua.getMenua().setVisible(true);
 				dispose();
 			}
 		});

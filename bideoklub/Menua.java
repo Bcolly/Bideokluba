@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 
 import interfazeGrafikoa.AdministratzaileaIn;
 import interfazeGrafikoa.BazkideaIn;
+import interfazeGrafikoa.DatuakAldatu;
 import interfazeGrafikoa.Librea;
 
 import javax.swing.AbstractButton;
@@ -52,6 +53,7 @@ public class Menua extends JFrame {
 	private JRadioButton rdbtnErab;
 	private JRadioButton rdbtnLib;
 	private ButtonGroup butGroup;
+	private BazkideaIn bazLei;
 	
 	/**
 	 * Launch the application.
@@ -75,6 +77,7 @@ public class Menua extends JFrame {
 	public Menua() {
 		initialize();
 	}
+	
 	private void initialize() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -86,6 +89,8 @@ public class Menua extends JFrame {
 		contentPane.add(getPanel(), BorderLayout.CENTER);
 		contentPane.add(getPanel_1(), BorderLayout.NORTH);
 		contentPane.add(getPanel_2(), BorderLayout.SOUTH);
+		textField.setText(null);
+		textField_1.setText(null);
 	}
 	public String kodeaLortu(){
 		return Menua.getMenua().getTextField().getText();
@@ -118,13 +123,13 @@ public class Menua extends JFrame {
 						if(button.isSelected()){
 							if(button.getText().equals("Libre")){
 								Librea libLei = new Librea();
-								libLei.main(null);
+								libLei.setVisible(true);
 								dispose();
 							}
 							else if(button.getText().equals("Erabiltzaile")){
 								if(Bideokluba.getDB().login(kodeaLortu(), getTextField_1().getText())){
-									BazkideaIn bazLei = new BazkideaIn();
-									bazLei.main(null);
+									bazLei = BazkideaIn.getBazkide();
+									bazLei.setVisible(true);
 									dispose();
 								}
 								else{
@@ -135,7 +140,7 @@ public class Menua extends JFrame {
 							}
 							else{
 								AdministratzaileaIn adminLei = new AdministratzaileaIn();
-								adminLei.main(null);
+								adminLei.setVisible(true);
 								dispose();
 							}
 						}
@@ -303,5 +308,8 @@ public class Menua extends JFrame {
 			butGroup.add(rdbtnLib);
 		}
 		return rdbtnLib;
+	}
+	public void hasieratu() {
+		myMenu = new Menua();
 	}
 }

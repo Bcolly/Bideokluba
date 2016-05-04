@@ -62,29 +62,33 @@ public class Bideokluba {
     
     public static void main(String[] args) {}
     
-    public void bazkideaSortu(String pIzena, String pAbizena, String pKodea, String pPass, String pHelbidea) {
+    public String bazkideaSortu(String pIzena, String pAbizena, String pKodea, String pPass, String pHelbidea) {
     	//el kode automatico???
     	try {
     		sta = con.createStatement();
     		sta.executeUpdate("INSERT INTO BAZKIDE (kodea, passWord, izena, abizenak, helbidea) VALUES ('"+pKodea+"','"+pPass+"','"+pIzena+"','"+pAbizena+"','"+pHelbidea+"')");
+    		return "Bazkidea ondo sortu duzu";
     	}
     	catch (SQLException e) {
     		e.printStackTrace();
     	}
+    	return "Bazkidea ezin izan da sortu";
     }
 
-    public void pelikulaSortu(String pKodea, String pTitulo, String pPrezio) {
+    public String pelikulaSortu(String pKodea, String pTitulo, String pPrezio) {
     	//el kode automatico???
     	try {
     		sta = con.createStatement();
     		sta.executeUpdate("INSERT INTO PELIKULA (kodea, titulua, prezioa) VALUES ('"+pKodea+"','"+pTitulo+"','"+pPrezio+"')");
+    		return "Pelikula ondo sortu duzu";
     	}
     	catch (SQLException e) {
     		e.printStackTrace();
         }
+    	return "Pelikula ezin izan da sortu";
     }
 
-    public void pelikulaBajaEman(String pKodea) {
+    public String pelikulaBajaEman(String pKodea) {
     	try{
     		sta = con.createStatement();
 			res = sta.executeQuery("SELECT egoera FROM PELIKULA WHERE kodea='"+pKodea+"'");
@@ -93,14 +97,17 @@ public class Bideokluba {
 		    String egoera = res.getString("egoera");
 		    if (egoera.equals("Libre")) {
 		    	pelikulaBorratu(pKodea);
+		    	return "Pelikula ezabatu egin da";
 		    }
 		    else {
 		    	sta.executeUpdate("UPDATE PELIKULA SET egoera='Deskatalogatuta' WHERE kodea='"+pKodea+"'");
+		    	return "Pelikula norbaitek dauka, deskatalogatu egin da momentuz. Itzultzean ezabatuko da";
 		    }
     	}
     	catch (SQLException e) {
     		e.printStackTrace();
         }
+    	return "Arazo bat gertatu da pelikula baja ematerakoan";
     }
 
     public ArrayList<String> pelikulaBilatu(String pTitulo){
@@ -156,24 +163,27 @@ public class Bideokluba {
 		return false;
     }
 
-    public void bazkideaAldatu(String pKodea) {
+    public String bazkideaAldatu(String pKodea) {
     	try {
 			sta = con.createStatement();
 			res = sta.executeQuery("SELECT egoera FROM BAZKIDE WHERE kodea='"+pKodea+"'");
 			res.next();
-			System.out.println("Egoera: "+res.getString("egoera"));
 		    String egoera = res.getString("egoera");
 		    if (egoera.equals("Alta")) {
 		    	bazkideBaja(pKodea);
+		    	 res.close();
+		    	return "Bazkideari baja eman diozu";
 		    }
 		    else {
 		    	bazkideAlta(pKodea);
+		    	 res.close();
+		    	return "Bazkideari alta eman diozu";
 		    } 
-		    res.close();
     	}
 		catch (SQLException e) {
 		    e.printStackTrace();
 		}
+    	return "Arazoren bat gertatu da ezin izan da egoera aldatu";
     }
     
     private void bazkideAlta(String pKodea) throws SQLException {
@@ -183,7 +193,7 @@ public class Bideokluba {
     
     private void bazkideBaja(String pKodea) throws SQLException {
     	sta.executeUpdate("UPDATE BAZKIDE SET egoera='Baja' WHERE kodea='"+pKodea+"'");
-    	res = sta.executeQuery("SELECT pelKodea FROM ALOKATU WHERE itzulData IS NULL");
+    	res = sta.executeQuery("SELECT pelKodea FROM ALOKATU WHERE itzulData IS NULL AND bazKodea='"+pKodea+"'");
 		while (res.next()) {
 			String pelikula = res.getString("pelKodea");
 			pelikulaItzuli(pelikula, pKodea);
@@ -328,35 +338,66 @@ public class Bideokluba {
 		sta = con.createStatement();
 		sta.executeUpdate("DELETE FROM PELIKULA WHERE kodea='"+pKodea+"'");
     }
-    
-    public void kredituaSartu(String pKodea, String pDirua) {
-    	try{
-    		sta = con.createStatement();
+     public String dirua(String pKodea) {
+    	 String kreditua = null;
+    	 try {
+    	 	sta = con.createStatement();
 			res = sta.executeQuery("SELECT kreditua FROM BAZKIDE WHERE kodea='"+pKodea+"'");
 			res.next();
-		    String kreditua = res.getString("kreditua");
-		    System.out.println("Kreditua: "+kreditua);
+		    kreditua = res.getString("kreditua");
+    	 }
+    	 catch (SQLException e) {
+     		e.printStackTrace();
+         }
+    	 return kreditua;
+     }
+    
+    public String kredituaSartu(String pKodea, String pDirua) {
+    	try{
+		    String kreditua = dirua(pKodea);
 		    float dirua = Float.parseFloat(kreditua) + Float.parseFloat(pDirua);
 		    if (dirua >= 0.0) {
 		    	kreditua = String.valueOf(dirua);
 		    	sta.executeUpdate("UPDATE BAZKIDE SET kreditua='"+String.valueOf(dirua)+"' WHERE kodea='"+pKodea+"'");
+		    	return "Dirua ondo gehitu da";
 		    }
     	}
     	catch (SQLException e) {
     		e.printStackTrace();
         }
+    	return "Arazoren bat dago, ezi da dirua gehitu";
     }
 
-    public int pelikulaKant() {
-    	int kant = 0;
-    	try {
+	public String[] bazkideOsoa(String pKodea) {
+		String[] bazkidea = new String[3];
+		try {
 			sta = con.createStatement();
-			res = sta.executeQuery("SELECT count(*) FROM PELIKULA ORDER BY kodea");
+			res = sta.executeQuery("SELECT izena,abizenak,helbidea FROM BAZKIDE WHERE kodea='"+pKodea+"'");
 			res.next();
-			kant = Integer.valueOf(res.getString("count(*)"));
+			bazkidea[0] = res.getString("izena");
+			bazkidea[1] = res.getString("abizenak");
+			bazkidea[2] = res.getString("helbidea");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-    	return kant;
-    }
+		return bazkidea;
+	}
+
+	public String datuakAldatu(String pKodea, String pIzena, String pAbizenak, String pPass, String pHelbidea) {
+		try {
+			sta = con.createStatement();
+			System.out.println("UPDATE BAZKIDE SET izena='"+pIzena+"', "
+					+ "abizenak='"+pAbizenak+"', "
+					+ "passWord='"+pPass+"', "
+					+ "helbidea='"+pHelbidea+"' WHERE kodea='"+pKodea+"'");
+			res = sta.executeQuery("UPDATE BAZKIDE SET izena='"+pIzena+"', "
+					+ "abizenak='"+pAbizenak+"', "
+					+ "passWord='"+pPass+"', "
+					+ "helbidea='"+pHelbidea+"' WHERE kodea='"+pKodea+"'");
+			return "Datuak aldatu dira";
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return "Datuakez dira aldatu errore bat egon delako";
+	}
 }
