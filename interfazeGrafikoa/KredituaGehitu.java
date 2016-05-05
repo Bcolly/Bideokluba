@@ -67,14 +67,8 @@ public class KredituaGehitu extends JFrame {
 			btnItzuli.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					Bazkidea bazkide = new Bazkidea();
-					bazkide.kredituaGehitu(Menua.getMenua().kodeaLortu(),textField.getText());
 					JOptionPane a = new JOptionPane();
-					if(true){
-						a.showMessageDialog(null, "MEZUA"); //TODO
-					}
-					else{
-						a.showMessageDialog(null, "MEZUA"); //TODO
-					}
+					a.showMessageDialog(null,bazkide.kredituaGehitu(Menua.getMenua().kodeaLortu(),textField.getText()));
 					dispose();
 					BazkideaIn.getBazkide().diruaEguneratu();
 				}

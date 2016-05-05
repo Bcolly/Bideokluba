@@ -7,9 +7,11 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 
 import bideoklub.Administratzailea;
@@ -19,7 +21,7 @@ public class BazkideaSortu extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
-	private JTextField textField_2;
+	private JPasswordField textField_2;
 	private JTextField textField_3;
 	
 	private Administratzailea admin = new Administratzailea();
@@ -60,20 +62,19 @@ public class BazkideaSortu extends JFrame {
 		lblNewLabel.setBounds(10, 11, 160, 14);
 		contentPane.add(lblNewLabel);
 		
-		JLabel lblIzena = new JLabel("Izena");
-		lblIzena.setBounds(10, 36, 46, 14);
+		JLabel lblIzena = new JLabel("Izena (GUTXIENEZ 3 KARAKTERE)");
+		lblIzena.setBounds(10, 36, 300, 14);
 		contentPane.add(lblIzena);
-		
-		JLabel lblAbizena = new JLabel("Abizena");
-		lblAbizena.setBounds(10, 81, 46, 14);
+		JLabel lblAbizena = new JLabel("Abizena (GUTXIENEZ 3 KARAKTERE)");
+		lblAbizena.setBounds(10, 81, 300, 14);
 		contentPane.add(lblAbizena);
 		
 		JLabel lblPasahitza = new JLabel("Pasahitza");
-		lblPasahitza.setBounds(10, 133, 46, 14);
+		lblPasahitza.setBounds(10, 133, 60, 14);
 		contentPane.add(lblPasahitza);
 		
 		JLabel lblHelbidea = new JLabel("Helbidea");
-		lblHelbidea.setBounds(10, 177, 46, 14);
+		lblHelbidea.setBounds(10, 177, 60, 14);
 		contentPane.add(lblHelbidea);
 		
 		textField_1 = new JTextField();
@@ -81,7 +82,7 @@ public class BazkideaSortu extends JFrame {
 		contentPane.add(textField_1);
 		textField_1.setColumns(10);
 		
-		textField_2 = new JTextField();
+		textField_2 = new JPasswordField();
 		textField_2.setBounds(10, 146, 127, 20);
 		contentPane.add(textField_2);
 		textField_2.setColumns(10);
@@ -94,7 +95,8 @@ public class BazkideaSortu extends JFrame {
 		JButton btnSortu = new JButton("Sortu");
 		btnSortu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				admin.bazkideaSortu(textField.getText(),textField_1.getText(),textField_2.getText(),textField_3.getText());
+				JOptionPane a = new JOptionPane();
+				a.showMessageDialog(null, admin.bazkideaSortu(textField.getText(),textField_1.getText(),textField_2.getText(),textField_3.getText()));
 				dispose();
 			}
 		});

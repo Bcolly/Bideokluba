@@ -16,6 +16,7 @@ import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+import bideoklub.Bideokluba;
 import bideoklub.Libre;
 import bideoklub.Menua;
 
@@ -78,7 +79,8 @@ public class Librea extends JFrame {
 		JButton btnSaioaAmaitu = new JButton("Saioa Amaitu");
 		btnSaioaAmaitu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Menua.getMenua().hasieratu();;
+				Bideokluba.getDB().konexioaItxi();
+				Menua.getMenua().hasieratu();
 				Menua.getMenua().setVisible(true);
 				dispose();
 			}

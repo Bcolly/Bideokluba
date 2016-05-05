@@ -18,7 +18,7 @@ public class Administratzailea extends Libre {
 	
 	public String pelikulaSortu(String pTitulo, String pPrezio){
 		int zenb = new Random().nextInt(10000);
-		String pKodea = pTitulo.substring(0,3)+String.valueOf(zenb);
+		String pKodea = pTitulo.substring(0,2)+String.valueOf(zenb);
 		return Bideokluba.getDB().pelikulaSortu(pKodea, pTitulo, pPrezio);
 	}
 	

@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import bideoklub.Administratzailea;
 
@@ -57,8 +58,8 @@ public class PelikulaSortu extends JFrame {
 		lblNewLabel.setBounds(10, 11, 160, 14);
 		contentPane.add(lblNewLabel);
 		
-		JLabel lblIzena = new JLabel("Titulua");
-		lblIzena.setBounds(10, 36, 46, 14);
+		JLabel lblIzena = new JLabel("Titulua (GUTXIENEZ 2 KARAKTERE)");
+		lblIzena.setBounds(10, 36,300, 14);
 		contentPane.add(lblIzena);
 		
 		JLabel lblAbizena = new JLabel("Kostua");
@@ -73,7 +74,8 @@ public class PelikulaSortu extends JFrame {
 		JButton btnSortu = new JButton("Sortu");
 		btnSortu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new Administratzailea().pelikulaSortu(textField.getText(),textField_1.getText());
+				JOptionPane a = new JOptionPane();
+				a.showMessageDialog(null, new Administratzailea().pelikulaSortu(textField.getText(),textField_1.getText()));
 				dispose();
 			}
 		});

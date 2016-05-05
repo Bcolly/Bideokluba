@@ -9,6 +9,7 @@ public class ProbaBideokluba {
 	 public static void main(String[] args) {
 		 Bideokluba bk = Bideokluba.getDB();
 		 //bk.konektatu();
+		 bk.datuakAldatu("jonu12", "Jon", "Holi", "12345", "Calle dos");
 	    	 //probak
 	   //bk.kredituaSartu("jonu12", "2.50");
 	    // bk.bazkideaAldatu("1112B");

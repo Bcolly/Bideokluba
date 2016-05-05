@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 
 import bideoklub.Administratzailea;
+import bideoklub.Bideokluba;
 import bideoklub.Menua;
 
 public class AdministratzaileaIn extends JFrame {
@@ -113,7 +114,8 @@ public class AdministratzaileaIn extends JFrame {
 		JButton btnSaioaAmaitu = new JButton("Saioa Amaitu");
 		btnSaioaAmaitu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Menua.getMenua().hasieratu();;
+				Bideokluba.getDB().konexioaItxi();
+				Menua.getMenua().hasieratu();
 				Menua.getMenua().setVisible(true);
 				dispose();
 			}

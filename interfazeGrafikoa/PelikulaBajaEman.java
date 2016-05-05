@@ -65,14 +65,8 @@ public class PelikulaBajaEman extends JFrame {
 			btnItzuli.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					Administratzailea admin = new Administratzailea();
-					admin.pelikulaBajaEman(textField.getText());
 					JOptionPane a = new JOptionPane();
-					if(true){
-						a.showMessageDialog(null, "MEZUA"); //TODO
-					}
-					else{
-						a.showMessageDialog(null, "MEZUA"); //TODO
-					}
+					a.showMessageDialog(null, admin.pelikulaBajaEman(textField.getText()));
 					dispose();
 				}
 			});

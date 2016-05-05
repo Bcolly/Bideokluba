@@ -74,7 +74,7 @@ public class Menua extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Menua() {
+	private Menua() {
 		initialize();
 	}
 	
@@ -108,6 +108,7 @@ public class Menua extends JFrame {
 	public static Menua getMenua(){
 		if (myMenu == null) {
 			myMenu = new Menua();
+			Bideokluba.getDB().konektatu();
 		}
 		return myMenu;
 	}
@@ -206,18 +207,15 @@ public class Menua extends JFrame {
 				
 				@Override
 				public void keyPressed(KeyEvent arg0) {
-					// TODO Auto-generated method stub
 				}
 
 				@Override
 				public void keyReleased(KeyEvent arg0) {
-					// TODO Auto-generated method stub
 					Menua.getMenua().getTextField().setText(textField.getText());
 				}
 
 				@Override
 				public void keyTyped(KeyEvent arg0) {
-					// TODO Auto-generated method stub
 				}
 			});
 		}
@@ -243,18 +241,16 @@ public class Menua extends JFrame {
 				
 				@Override
 				public void keyPressed(KeyEvent arg0) {
-					// TODO Auto-generated method stub
+
 				}
 
 				@Override
 				public void keyReleased(KeyEvent arg0) {
-					// TODO Auto-generated method stub
 					Menua.getMenua().getTextField_1().setText(textField_1.getText());
 				}
 
 				@Override
 				public void keyTyped(KeyEvent arg0) {
-					// TODO Auto-generated method stub
 				}
 			});
 		}
@@ -310,6 +306,6 @@ public class Menua extends JFrame {
 		return rdbtnLib;
 	}
 	public void hasieratu() {
-		myMenu = new Menua();
+		myMenu = null;
 	}
 }

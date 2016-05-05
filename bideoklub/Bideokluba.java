@@ -5,6 +5,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import interfazeGrafikoa.BazkideaIn;
+
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -29,7 +32,6 @@ public class Bideokluba {
     public static Bideokluba getDB(){
     	if (nBideoklub == null){
     		nBideoklub = new Bideokluba();
-    		nBideoklub.konektatu();
     	}
     	return nBideoklub;
     }
@@ -71,8 +73,8 @@ public class Bideokluba {
     	}
     	catch (SQLException e) {
     		e.printStackTrace();
+    		return "Bazkidea ezin izan da sortu";
     	}
-    	return "Bazkidea ezin izan da sortu";
     }
 
     public String pelikulaSortu(String pKodea, String pTitulo, String pPrezio) {
@@ -209,14 +211,22 @@ public class Bideokluba {
       String min = Integer.toString(c.get(Calendar.MINUTE));
       String sec = Integer.toString(c.get(Calendar.SECOND));
     	try {
-		    if (pelikulaAlokatuDaiteke(pKodea)){
-		    	if (diruNahikoaDuzu(pKodea, pBazKodea)) {
-			    	sta.executeUpdate("UPDATE PELIKULA SET egoera='Alokatua' WHERE kodea='"+pKodea+"'");
-		    		sta.executeUpdate("INSERT INTO ALOKATU(pelkodea, bazkodea, alokData) VALUES('"+pKodea+"','"+pBazKodea+"', '"+urtea+"-"+hila+"-"+eguna+" "+ordua+":"+min+":"+sec+"')");
-		    		return "Pelikula ondo alokatu duzu";
-		    	}
-		    	else return "Ez duzu diru nahikorik";
+    		res = sta.executeQuery("SELECT egoera FROM BAZKIDE WHERE kodea='"+pBazKodea+"'");
+			res.next();
+			System.out.println("Egoera: "+res.getString("egoera"));
+		    String egoera = res.getString("egoera");
+		    res.close();
+		    if (egoera.equals("Alta")) {
+		    	if (pelikulaAlokatuDaiteke(pKodea)){
+			    	if (diruNahikoaDuzu(pKodea, pBazKodea)) {
+				    	sta.executeUpdate("UPDATE PELIKULA SET egoera='Alokatua' WHERE kodea='"+pKodea+"'");
+			    		sta.executeUpdate("INSERT INTO ALOKATU(pelkodea, bazkodea, alokData) VALUES('"+pKodea+"','"+pBazKodea+"', '"+urtea+"-"+hila+"-"+eguna+" "+ordua+":"+min+":"+sec+"')");
+			    		return "Pelikula ondo alokatu duzu";
+			    	}
+			    	else return "Ez duzu diru nahikorik";
+			    }
 		    }
+		    else return "Bazkidea baja emanda dago";
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return "Pelikula ezin izan da alokatu. DATUBASEAREN ERROREA";
@@ -355,13 +365,16 @@ public class Bideokluba {
     public String kredituaSartu(String pKodea, String pDirua) {
     	try{
 		    String kreditua = dirua(pKodea);
-		    float dirua = Float.parseFloat(kreditua) + Float.parseFloat(pDirua);
-		    if (dirua >= 0.0) {
-		    	kreditua = String.valueOf(dirua);
-		    	sta.executeUpdate("UPDATE BAZKIDE SET kreditua='"+String.valueOf(dirua)+"' WHERE kodea='"+pKodea+"'");
-		    	return "Dirua ondo gehitu da";
+		    if (Float.parseFloat(pDirua) > 0.0) {
+		    	float dirua = Float.parseFloat(kreditua) + Float.parseFloat(pDirua);
+		    	if (dirua >= 0.0) {
+		    		kreditua = String.valueOf(dirua);
+		    		sta.executeUpdate("UPDATE BAZKIDE SET kreditua='"+String.valueOf(dirua)+"' WHERE kodea='"+pKodea+"'");
+		    		return "Dirua ondo gehitu da";
+		    	}
 		    }
-    	}
+		    else return "Dirua positiboa izan behar da";
+		}
     	catch (SQLException e) {
     		e.printStackTrace();
         }
@@ -390,7 +403,7 @@ public class Bideokluba {
 					+ "abizenak='"+pAbizenak+"', "
 					+ "passWord='"+pPass+"', "
 					+ "helbidea='"+pHelbidea+"' WHERE kodea='"+pKodea+"'");
-			res = sta.executeQuery("UPDATE BAZKIDE SET izena='"+pIzena+"', "
+			sta.executeUpdate("UPDATE BAZKIDE SET izena='"+pIzena+"', "
 					+ "abizenak='"+pAbizenak+"', "
 					+ "passWord='"+pPass+"', "
 					+ "helbidea='"+pHelbidea+"' WHERE kodea='"+pKodea+"'");

@@ -106,9 +106,11 @@ public class BazkideaIn extends JFrame {
 	btnSaioaAmaitu.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent arg0) {
 			nBazkide=null;
-			Menua.getMenua().hasieratu();;
+			Bideokluba.getDB().konexioaItxi();
+			Menua.getMenua().hasieratu();
 			Menua.getMenua().setVisible(true);
 			dispose();
+			
 		}
 	});
 	btnSaioaAmaitu.setBounds(46, 222, 110, 23);

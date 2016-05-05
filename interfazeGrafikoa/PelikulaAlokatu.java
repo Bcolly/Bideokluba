@@ -61,15 +61,10 @@ public class PelikulaAlokatu extends JFrame {
 		btnAlokatu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Bazkidea bazkide = new Bazkidea();
-				bazkide.pelikulaAlokatu(txtUty.getText(), Menua.getMenua().kodeaLortu());
 				JOptionPane a = new JOptionPane();
-				if(true){
-					a.showMessageDialog(null, "MEZUA"); //TODO
-				}
-				else{
-					a.showMessageDialog(null, "MEZUA"); //TODO
-				}
+				a.showMessageDialog(null, bazkide.pelikulaAlokatu(txtUty.getText(), Menua.getMenua().kodeaLortu()));
 				dispose();
+				BazkideaIn.getBazkide().diruaEguneratu();
 			}
 		});
 		btnAlokatu.setBounds(10, 103, 89, 23);

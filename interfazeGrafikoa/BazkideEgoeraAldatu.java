@@ -62,9 +62,8 @@ public class BazkideEgoeraAldatu extends JFrame {
 		btnItzuli.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Administratzailea admin = new Administratzailea();
-
-				admin.bazkideEgoera(textField.getText());
 				JOptionPane a = new JOptionPane();
+				a.showMessageDialog(null, admin.bazkideEgoera(textField.getText()));
 				dispose();
 			}
 		});
