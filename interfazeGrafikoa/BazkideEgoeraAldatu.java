@@ -43,7 +43,7 @@ public class BazkideEgoeraAldatu extends JFrame {
 	 */
 	public BazkideEgoeraAldatu() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 325, 220);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -69,5 +69,15 @@ public class BazkideEgoeraAldatu extends JFrame {
 		});
 		btnItzuli.setBounds(10, 107, 89, 23);
 		contentPane.add(btnItzuli);
+		
+		JButton btnIrten = new JButton("Irten");
+		btnIrten.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		btnIrten.setBounds(109, 107, 89, 23);
+		contentPane.add(btnIrten);
 	}
+	
 }

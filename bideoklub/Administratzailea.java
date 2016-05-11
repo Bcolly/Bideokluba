@@ -7,8 +7,14 @@ public class Administratzailea extends Libre {
 	public Administratzailea(){}
 	
 	public String bazkideaSortu(String pIzena, String pAbizena, String pPass, String pHelbidea){
-		int zenb = new Random().nextInt(1000);
-		String pKodea = pIzena.substring(0,3)+pAbizena.substring(0,3)+String.valueOf(zenb);
+		boolean badago = false;
+		String pKodea = null;
+		while (!badago) {
+			int zenb = new Random().nextInt(1000);
+			pKodea = pIzena.substring(0,3)+pAbizena.substring(0,3)+String.valueOf(zenb);
+			if (!Bideokluba.getDB().badagoKodea(pKodea))
+				badago = true;
+		}
 		return Bideokluba.getDB().bazkideaSortu(pIzena, pAbizena, pKodea, pPass, pHelbidea);
 	}
 	
@@ -17,8 +23,14 @@ public class Administratzailea extends Libre {
 	}
 	
 	public String pelikulaSortu(String pTitulo, String pPrezio){
-		int zenb = new Random().nextInt(10000);
-		String pKodea = pTitulo.substring(0,2)+String.valueOf(zenb);
+		boolean badago = false;
+		String pKodea = null;
+		while (!badago) {
+			int zenb = new Random().nextInt(100000);
+			pKodea = pTitulo.substring(0,2)+String.valueOf(zenb);
+			if (!Bideokluba.getDB().badagoKodeaPeli(pKodea))
+				badago = true;
+		}
 		return Bideokluba.getDB().pelikulaSortu(pKodea, pTitulo, pPrezio);
 	}
 	

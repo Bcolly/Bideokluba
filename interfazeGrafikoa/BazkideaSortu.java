@@ -102,5 +102,14 @@ public class BazkideaSortu extends JFrame {
 		});
 		btnSortu.setBounds(20, 222, 89, 23);
 		contentPane.add(btnSortu);
+		
+		JButton btnIrten = new JButton("Irten");
+		btnIrten.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		btnIrten.setBounds(135, 222, 89, 23);
+		contentPane.add(btnIrten);
 	}
 }

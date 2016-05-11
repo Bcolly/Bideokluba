@@ -48,7 +48,7 @@ public class KredituaGehitu extends JFrame {
 		 */
 		public KredituaGehitu() {
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
-			setBounds(100, 100, 450, 300);
+			setBounds(100, 100, 338, 203);
 			contentPane = new JPanel();
 			contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 			setContentPane(contentPane);
@@ -75,5 +75,14 @@ public class KredituaGehitu extends JFrame {
 			});
 			btnItzuli.setBounds(10, 107, 89, 23);
 			contentPane.add(btnItzuli);
+			
+			JButton btnIrten = new JButton("Irten");
+			btnIrten.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					dispose();
+				}
+			});
+			btnIrten.setBounds(109, 107, 89, 23);
+			contentPane.add(btnIrten);
 		}
 	}

@@ -413,4 +413,42 @@ public class Bideokluba {
 		}
 		return "Datuakez dira aldatu errore bat egon delako";
 	}
+
+	public ArrayList<String> bezeroarenPelikulak(String pKodea) {
+		ArrayList<String> eran = new ArrayList<String>();
+		try {
+			sta = con.createStatement();
+			res = sta.executeQuery("SELECT kodea,titulua FROM ALOKATU,PELIKULA WHERE pelKodea=kodea AND itzulData IS NULL AND bazKodea='"+pKodea+"' ORDER BY alokData");
+			while (res.next()) {
+				String titulua = res.getString("titulua");
+				String kodea = res.getString("kodea");
+				eran.add(titulua); eran.add(kodea);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return eran;
+	}
+
+	public boolean badagoKodea(String pKodea) {
+		try {
+			sta = con.createStatement();
+			res = sta.executeQuery("SELECT * FROM BAZKIDE WHERE kodea='"+pKodea+"'");
+			if (res.next()) return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	public boolean badagoKodeaPeli(String pKodea) {
+		try {
+			sta = con.createStatement();
+			res = sta.executeQuery("SELECT * FROM PELIKULA WHERE kodea='"+pKodea+"'");
+			if (res.next()) return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 }

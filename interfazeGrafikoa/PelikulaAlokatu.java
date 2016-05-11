@@ -42,7 +42,7 @@ public class PelikulaAlokatu extends JFrame {
 	 */
 	public PelikulaAlokatu() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 341, 228);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -69,6 +69,15 @@ public class PelikulaAlokatu extends JFrame {
 		});
 		btnAlokatu.setBounds(10, 103, 89, 23);
 		contentPane.add(btnAlokatu);
+		
+		JButton btnIrten = new JButton("Irten");
+		btnIrten.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		btnIrten.setBounds(109, 103, 89, 23);
+		contentPane.add(btnIrten);
 	}
 
 }

@@ -54,6 +54,7 @@ public class Menua extends JFrame {
 	private JRadioButton rdbtnLib;
 	private ButtonGroup butGroup;
 	private BazkideaIn bazLei;
+	private JButton btnIrten;
 	
 	/**
 	 * Launch the application.
@@ -170,6 +171,7 @@ public class Menua extends JFrame {
 			panel_2 = new JPanel();
 			panel_2.add(getBtnOk());
 			panel_2.add(getVerticalStrut());
+			panel_2.add(getBtnIrten());
 		}
 		return panel_2;
 	}
@@ -307,5 +309,18 @@ public class Menua extends JFrame {
 	}
 	public void hasieratu() {
 		myMenu = null;
+	}
+	private JButton getBtnIrten() {
+		if (btnIrten == null) {
+			btnIrten = new JButton("Irten");
+			btnIrten.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					dispose();
+				}
+			});
+		}
+		return btnIrten;
 	}
 }

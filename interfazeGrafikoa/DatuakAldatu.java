@@ -50,7 +50,7 @@ public class DatuakAldatu extends JFrame {
 	 */
 	public DatuakAldatu() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 348, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -96,7 +96,7 @@ public class DatuakAldatu extends JFrame {
 		textField_2.setColumns(10);
 		
 		textField_3 = new JTextField();
-		textField_3.setBounds(10, 191, 378, 20);
+		textField_3.setBounds(10, 191, 275, 20);
 		contentPane.add(textField_3);
 		textField_3.setColumns(10);
 		textField_3.setText(bazkidea[2]);
@@ -114,5 +114,14 @@ public class DatuakAldatu extends JFrame {
 		});
 		btnSortu.setBounds(20, 222, 89, 23);
 		contentPane.add(btnSortu);
+		
+		JButton btnIrten = new JButton("Irten");
+		btnIrten.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		btnIrten.setBounds(119, 222, 89, 23);
+		contentPane.add(btnIrten);
 	}
 }
